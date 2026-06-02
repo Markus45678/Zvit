@@ -378,7 +378,7 @@ def admin_view(page: ft.Page):
 
 
     sidebar = ft.Container(
-        width=400,
+        width=300,
         bgcolor=PRIMARY,
         padding=ft.padding.symmetric(horizontal=16, vertical=24),
         content=ft.Column(
@@ -392,15 +392,15 @@ def admin_view(page: ft.Page):
                     ], spacing=10),
                     margin=ft.margin.only(bottom=20),
                 ),
-                ft.Button("Переглянути склад",style=ft.ButtonStyle(text_style=ft.TextStyle(size=30)),  icon = ft.Icons.INVENTORY_2_OUTLINED,on_click = show_storage, width = 350, height =50),
-                ft.Button("Продаж",style=ft.ButtonStyle(text_style=ft.TextStyle(size=30)), icon = ft.Icons.SELL_OUTLINED,on_click =sell_product, width = 350, height = 50),
-                ft.Button("Повернення",style=ft.ButtonStyle(text_style=ft.TextStyle(size=30)),icon = ft.Icons.ASSIGNMENT_RETURN_OUTLINED, on_click =return_product, width = 350, height = 50),
-                ft.Button("Додати препарат",style=ft.ButtonStyle(text_style=ft.TextStyle(size=30)),icon =ft.Icons.ADD_CIRCLE_OUTLINE,         on_click =add_product, width = 350, height = 50),
-                ft.Button("Видалити прострочені",style=ft.ButtonStyle(text_style=ft.TextStyle(size=26)),icon =ft.Icons.DELETE_SWEEP_OUTLINED,      on_click =delete_expired, width = 350, height = 50),
-                ft.Button("Редагувати препарат",style=ft.ButtonStyle(text_style=ft.TextStyle(size=26)),icon =ft.Icons.EDIT_OUTLINED,              on_click =edit_product, width = 350, height =50),
+                ft.Button("Переглянути склад",  icon = ft.Icons.INVENTORY_2_OUTLINED,on_click = show_storage, width = 250,),
+                ft.Button("Продаж", icon = ft.Icons.SELL_OUTLINED,on_click =sell_product, width = 250,),
+                ft.Button("Повернення",icon = ft.Icons.ASSIGNMENT_RETURN_OUTLINED, on_click =return_product, width = 250,),
+                ft.Button("Додати препарат",icon =ft.Icons.ADD_CIRCLE_OUTLINE,         on_click =add_product, width = 250,),
+                ft.Button("Видалити прострочені",icon =ft.Icons.DELETE_SWEEP_OUTLINED,      on_click =delete_expired, width = 250,),
+                ft.Button("Редагувати препарат",icon =ft.Icons.EDIT_OUTLINED,              on_click =edit_product, width = 250,),
                 ft.Container(expand=True),
                 ft.Divider(color="#1E293B"),
-                ft.Button("Вийти",style=ft.ButtonStyle(text_style=ft.TextStyle(size=30)),icon = ft.Icons.LOGOUT_OUTLINED, on_click =go_back, height = 50),
+                ft.Button("Вийти",icon = ft.Icons.LOGOUT_OUTLINED, on_click =go_back,),
             ],
         ),
     )
