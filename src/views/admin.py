@@ -6,7 +6,7 @@ from datetime import datetime
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JSON_FILE = os.path.join(BASE, "storages", "medicines.json")
 
-# ── Кольорова палітра ──────────────────────────────────────────
+
 PRIMARY      = "#0F172A"
 ACCENT       = "#38BDF8"
 ACCENT_DARK  = "#0EA5E9"
@@ -33,7 +33,9 @@ def save_data(data):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-# ── Допоміжні UI-компоненти ────────────────────────────────────
+
+
+
 
 def section_title(text):
     return ft.Text(text, size=22, weight=ft.FontWeight.BOLD, color=TEXT_MAIN)
@@ -148,7 +150,8 @@ def med_card(med, index, on_edit, on_delete):
     )
 
 
-# ── Головна функція view ───────────────────────────────────────
+
+
 
 def admin_view(page: ft.Page):
 

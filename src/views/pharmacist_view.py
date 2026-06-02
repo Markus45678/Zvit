@@ -8,7 +8,6 @@ JSON_FILE = os.path.join(BASE, "storages", "medicines.json")
 HIST_FILE = os.path.join(BASE, "storages", "sales_history.json")
 INFO_FILE = os.path.join(BASE, "storages", "medicines_info.json")
 
-# ── Палітра ────────────────────────────────────────────────────
 BG          = "#F5F7FA"
 PANEL_BG    = "#FFFFFF"
 NAV_BG      = "#00539B"
@@ -27,7 +26,7 @@ TEXT_MUTED  = "#6C757D"
 TEXT_WHITE  = "#FFFFFF"
 BORDER      = "#DEE2E6"
 
-# ── Категорії ─────────────────────────────────────────────────
+
 CATEGORIES = {
     "all":        ("Всі",            ft.Icons.APPS_ROUNDED),
     "pain":       ("Знеболюючі",     ft.Icons.HEALING_ROUNDED),
@@ -57,7 +56,7 @@ DEFAULT_INFO = {
     "warning":     "Перед застосуванням проконсультуйтеся з лікарем або фармацевтом."
 }
 
-# ── Завантаження даних ─────────────────────────────────────────
+
 
 def load_info() -> dict:
     if not os.path.exists(INFO_FILE):
@@ -98,7 +97,7 @@ def append_history(name: str, qty: int):
         json.dump(history, f, ensure_ascii=False, indent=4)
 
 
-# ── UI-хелпери ─────────────────────────────────────────────────
+
 
 def badge(text, bg, color):
     return ft.Container(
@@ -149,7 +148,7 @@ def notify_bar(msg: str, ok: bool):
     )
 
 
-# ── Картка у стилі tablets.ua ──────────────────────────────────
+
 
 def grid_card(med, on_card_click):
     try:
@@ -209,7 +208,7 @@ def grid_card(med, on_card_click):
                     ),
                 ]),
             ),
-            # ── Інфо-зона ──
+
             ft.Container(
                 padding=ft.padding.all(12),
                 content=ft.Column(spacing=6, controls=[
@@ -250,7 +249,7 @@ def grid_card(med, on_card_click):
     )
 
 
-# ── Рядок в історії ───────────────────────────────────────────
+
 
 def history_row(entry, index):
     is_even = index % 2 == 0
@@ -285,7 +284,7 @@ def history_row(entry, index):
     )
 
 
-# ── Панель інструкції + продажу ────────────────────────────────
+
 
 def build_detail_panel(med, on_confirm, on_cancel):
     info        = get_med_info(med["name"])
@@ -327,7 +326,7 @@ def build_detail_panel(med, on_confirm, on_cancel):
         border=ft.border.only(left=ft.BorderSide(1, BORDER)),
         content=ft.Column(scroll=ft.ScrollMode.AUTO, spacing=0, controls=[
 
-            # ── Шапка ──
+
             ft.Container(
                 bgcolor=NAV_BG,
                 padding=ft.padding.all(20),
@@ -373,7 +372,7 @@ def build_detail_panel(med, on_confirm, on_cancel):
                 ]),
             ),
 
-            # ── Інструкція ──
+
             ft.Container(
                 padding=ft.padding.all(20),
                 content=ft.Column(spacing=14, controls=[
@@ -443,7 +442,7 @@ def build_detail_panel(med, on_confirm, on_cancel):
     )
 
 
-# ── Головна функція view ───────────────────────────────────────
+
 
 def pharmacist_view(page: ft.Page):
 
@@ -457,7 +456,7 @@ def pharmacist_view(page: ft.Page):
     history_column     = ft.Column(scroll=ft.ScrollMode.AUTO, expand=True,
                                    spacing=6, visible=False)
 
-    # ── таби ─────────────────────────────────────────────────────
+
     tab_stock_ref   = ft.Ref[ft.TextButton]()
     tab_history_ref = ft.Ref[ft.TextButton]()
 
@@ -487,7 +486,7 @@ def pharmacist_view(page: ft.Page):
             refresh_history()
         hide_panel()
 
-    # ── фільтрація ───────────────────────────────────────────────
+
 
     def filtered(query="", flt="all", cat="all"):
         data = load_data()
@@ -503,14 +502,14 @@ def pharmacist_view(page: ft.Page):
             data = [m for m in data if int(m.get("amount", 0) or 0) >= 5]
         return data
 
-    # ── сповіщення ───────────────────────────────────────────────
+
 
     def show_notify(msg, ok):
         notify_wrapper.content = notify_bar(msg, ok)
         notify_wrapper.visible = True
         notify_wrapper.update()
 
-    # ── панель ───────────────────────────────────────────────────
+
 
     def hide_panel(e=None):
         sell_panel_wrapper.visible = False
@@ -548,7 +547,7 @@ def pharmacist_view(page: ft.Page):
         refresh_grid(search_field.value, current_filter["value"], current_category["value"])
         show_notify(f"Продано: {med['name']} — {qty} шт.", ok=True)
 
-    # ── сітка ────────────────────────────────────────────────────
+
 
     def build_grid_controls(query="", flt="all", cat="all"):
         medicines = filtered(query, flt, cat)
@@ -573,7 +572,7 @@ def pharmacist_view(page: ft.Page):
         grid_column.controls = build_grid_controls(query, flt, cat)
         grid_column.update()
 
-    # ── історія ──────────────────────────────────────────────────
+
 
     def refresh_history():
         history = load_history()
@@ -597,7 +596,6 @@ def pharmacist_view(page: ft.Page):
             ]
         history_column.update()
 
-    # ── пошук ────────────────────────────────────────────────────
 
     search_field = ft.TextField(
         hint_text="Пошук препарату…",
@@ -611,7 +609,7 @@ def pharmacist_view(page: ft.Page):
             e.control.value, current_filter["value"], current_category["value"]),
     )
 
-    # ── чіпи наявності ───────────────────────────────────────────
+
     stock_chip_row_ref = ft.Ref[ft.Row]()
 
     def stock_chip(label, value):
@@ -640,7 +638,7 @@ def pharmacist_view(page: ft.Page):
     ], spacing=12, visible=True,
        vertical_alignment=ft.CrossAxisAlignment.CENTER)
 
-    # ── чіпи категорій ───────────────────────────────────────────
+
     cat_row_ref = ft.Ref[ft.Row]()
 
     def cat_chip(cat_key):
@@ -672,7 +670,7 @@ def pharmacist_view(page: ft.Page):
         visible=True,
     )
 
-    # ── topbar ────────────────────────────────────────────────────
+
 
     async def go_back(e):
         await page.push_route("/")
@@ -702,7 +700,6 @@ def pharmacist_view(page: ft.Page):
         ),
     )
 
-    # ── основна область ───────────────────────────────────────────
 
     main_area = ft.Container(
         expand=True, bgcolor=BG,
