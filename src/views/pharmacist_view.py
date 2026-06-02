@@ -174,7 +174,7 @@ def grid_card(med, on_card_click):
         on_click=(None if disabled else lambda e, m=med: on_card_click(m)),
         opacity=0.55 if disabled else 1.0,
         content=ft.Column(spacing=0, controls=[
-            # ── Фото-зона ──
+
             ft.Container(
                 height=110,
                 bgcolor=BLUE_LIGHT if not disabled else "#F0F0F0",

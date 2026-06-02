@@ -173,7 +173,7 @@ def admin_view(page: ft.Page):
     async def go_back(e):
         await page.push_route("/")
 
-    # ── ПЕРЕГЛЯД ──
+
     async def show_storage(e):
         medicines = load_data()
 
